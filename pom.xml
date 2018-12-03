@@ -7,7 +7,7 @@
 
 	<groupId>edu.sjsu.cmpe202</groupId>
 	<artifactId>scf-parser</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	<name>scf-parser</name>
 	<description>Signed Certi:icates File Parser</description>
 
@@ -48,7 +48,6 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-bom</artifactId>
 			<version>${log4j-version}</version>
-			<scope>import</scope>
 			<type>pom</type>
 		</dependency>
 
