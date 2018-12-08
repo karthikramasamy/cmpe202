@@ -14,6 +14,14 @@ import edu.sjsu.cmpe202.util.TLVParserException;
 public class SCFParser {
 
 	public static void main(String[] args) {
+		
+		if(args.length == 0) {
+			throw new IllegalArgumentException("File name cannot be empty");
+		}
+		if(!args[0].contains(".tlv")) {
+			System.out.println(args[0]);
+			throw new IllegalArgumentException("Input should be a TLV file");
+		}
 
 		if (args.length < 1) {
 			System.out.println("Usage SCFParser <filename>");
