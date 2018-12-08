@@ -7,9 +7,9 @@
 
 	<groupId>edu.sjsu.cmpe202</groupId>
 	<artifactId>scf-parser</artifactId>
-	<version>0.1</version>
+	<version>0.2</version>
 	<name>scf-parser</name>
-	<description>Signed Certi:icates File Parser</description>
+	<description>Signed Certificates File Parser</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,7 +21,7 @@
 		<slf4j-version>1.7.25</slf4j-version>
 		<junit-version>4.12</junit-version>
 		<commons-codec-version>1.11</commons-codec-version>
-		<commons-collections-version>4.0</commons-collections-version>		
+		<commons-collections-version>4.1</commons-collections-version>		
 	</properties>
 
 	<dependencies>
