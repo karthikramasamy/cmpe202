@@ -1,9 +1,9 @@
 package edu.sjsu.cmpe202.util;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import org.apache.commons.codec.binary.Hex;
 
@@ -32,9 +32,9 @@ public class TLVParser {
 	 * @return
 	 * @throws TLVParserException
 	 */
-	public static Map<String, Object> parseTLV(byte[] tlvData) throws TLVParserException {
+	public static List<TLV> parseTLV(byte[] tlvData) throws TLVParserException {
 
-		Map<String, Object> parsedTlvData = new HashMap<String, Object>();
+		List<TLV> parsedTlvData = new ArrayList<TLV>();
 
 		do {
 			// To start with, we need at least 3 bytes for parsing the tag and length
@@ -52,7 +52,7 @@ public class TLVParser {
 
 			byte[] value = Arrays.copyOfRange(tlvData, TAG_PLUS_LEGNTH_BYTE_SIZE, TAG_PLUS_LEGNTH_BYTE_SIZE + length);
 
-			parsedTlvData.put("0x" + tag, value);
+			parsedTlvData.add(new TLV("0x" + tag, length, value));
 
 			tlvData = Arrays.copyOfRange(tlvData, TAG_PLUS_LEGNTH_BYTE_SIZE + length, tlvData.length);
 		} while (tlvData.length > 0);
