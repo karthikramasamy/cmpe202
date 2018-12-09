@@ -12,6 +12,9 @@ CMPE 202 Project Repository
 ## CodeFactor
 [![CodeFactor](https://www.codefactor.io/repository/github/karthikramasamy/cmpe202/badge)](https://www.codefactor.io/repository/github/karthikramasamy/cmpe202) 
 
+## CodeCov
+[![codecov](https://codecov.io/gh/karthikramasamy/cmpe202/branch/master/graph/badge.svg)](https://codecov.io/gh/karthikramasamy/cmpe202)
+
 ## SonarCloud
 [![Sonarcloud](https://sonarcloud.io/api/project_badges/measure?project=edu.sjsu.cmpe202%3Ascf-parser%3Adev&metric=alert_status)](https://sonarcloud.io/dashboard?id=edu.sjsu.cmpe202%3Ascf-parser%3Adev) [![Sonarcloud](https://sonarcloud.io/api/project_badges/measure?project=edu.sjsu.cmpe202%3Ascf-parser%3Adev&metric=security_rating)](https://sonarcloud.io/component_measures?id=edu.sjsu.cmpe202%3Ascf-parser%3Adev&metric=Security) [![Sonarcloud](https://sonarcloud.io/api/project_badges/measure?project=edu.sjsu.cmpe202%3Ascf-parser%3Adev&metric=reliability_rating)](https://sonarcloud.io/component_measures?id=edu.sjsu.cmpe202%3Ascf-parser%3Adev&metric=Reliability) [![Sonarcloud](https://sonarcloud.io/api/project_badges/measure?project=edu.sjsu.cmpe202%3Ascf-parser%3Adev&metric=sqale_rating)](https://sonarcloud.io/component_measures?id=edu.sjsu.cmpe202%3Ascf-parser%3Adev&metric=Maintainability) 
 
