@@ -2,11 +2,9 @@
 CMPE 202 Project Repository
 
 ## Build Status
-
-[![Build Status](https://travis-ci.com/karthikramasamy/cmpe202.svg?branch=master)](https://travis-ci.com/karthikramasamy/cmpe202) [![CircleCI](https://circleci.com/gh/karthikramasamy/cmpe202.svg?style=svg)](https://circleci.com/gh/karthikramasamy/cmpe202) [ ![Codeship Status for karthikramasamy/cmpe202](https://app.codeship.com/projects/17894260-daa0-0136-fb65-3aaa60baa320/status?branch=master)](https://app.codeship.com/projects/317572)
+[![Build Status](https://travis-ci.com/karthikramasamy/cmpe202.svg?branch=master)](https://travis-ci.com/karthikramasamy/cmpe202) [![CircleCI](https://circleci.com/gh/karthikramasamy/cmpe202.svg?style=svg)](https://circleci.com/gh/karthikramasamy/cmpe202) [![Codeship Status](https://app.codeship.com/projects/17894260-daa0-0136-fb65-3aaa60baa320/status?branch=master)](https://app.codeship.com/projects/317572)
 
 ## Code Quality Status
-
 [![CodeFactor](https://www.codefactor.io/repository/github/karthikramasamy/cmpe202/badge)](https://www.codefactor.io/repository/github/karthikramasamy/cmpe202) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4423bf3cc31c4f2db7fe71440a8d62be)](https://www.codacy.com/app/karthikramasamy/cmpe202?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=karthikramasamy/cmpe202&amp;utm_campaign=Badge_Grade) [![codecov](https://codecov.io/gh/karthikramasamy/cmpe202/branch/master/graph/badge.svg)](https://codecov.io/gh/karthikramasamy/cmpe202)
 
 [![Sonarcloud](https://sonarcloud.io/api/project_badges/measure?project=edu.sjsu.cmpe202%3Ascf-parser%3Adev&metric=alert_status)](https://sonarcloud.io/dashboard?id=edu.sjsu.cmpe202%3Ascf-parser%3Adev) [![Sonarcloud](https://sonarcloud.io/api/project_badges/measure?project=edu.sjsu.cmpe202%3Ascf-parser%3Adev&metric=security_rating)](https://sonarcloud.io/component_measures?id=edu.sjsu.cmpe202%3Ascf-parser%3Adev&metric=Security) [![Sonarcloud](https://sonarcloud.io/api/project_badges/measure?project=edu.sjsu.cmpe202%3Ascf-parser%3Adev&metric=reliability_rating)](https://sonarcloud.io/component_measures?id=edu.sjsu.cmpe202%3Ascf-parser%3Adev&metric=Reliability) [![Sonarcloud](https://sonarcloud.io/api/project_badges/measure?project=edu.sjsu.cmpe202%3Ascf-parser%3Adev&metric=sqale_rating)](https://sonarcloud.io/component_measures?id=edu.sjsu.cmpe202%3Ascf-parser%3Adev&metric=Maintainability) 
