@@ -2,6 +2,9 @@ package edu.sjsu.cmpe202.util.test;
 
 import static org.junit.Assert.fail;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Base64;
 
 import org.junit.Test;
@@ -56,10 +59,21 @@ public class TLVParserTest {
 	@Test
 	public void testParseHelper() {
 		ParseHelper helper = new ParseHelper();
-		String tlvSample = "AQAEAAAAAQIABAAAAAADAAgQIDBAIFBiTAQAEK3xHzAzzTY3XtovYNwMNu0FAAQAAAAB";
-		byte[] tlvData = Base64.getDecoder().decode(tlvSample);
-		helper.parseTLVHeader(tlvData);
-		helper.parseTLVBody(tlvData);
+		String tlvSample1 = "AQAEAAAAAQIABAAAAAADAAgQIDBAIFBiTAQAEK3xHzAzzTY3XtovYNwMNu0FAAQAAAAB";
+		byte[] tlvData1 = Base64.getDecoder().decode(tlvSample1);
+		
+		helper.parseTLVHeader(tlvData1);
+		helper.parseTLVBody(tlvData1);
+		
+		try{
+			File temp = File.createTempFile("tempfile", ".tmp"); 			
+			BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
+		    bw.write(tlvSample1);
+		    helper.parse(temp);
+		    bw.close();
+		} catch(Exception e) {
+			
+		}	    		
 	}
 
 }

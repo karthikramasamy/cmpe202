@@ -1,5 +1,8 @@
 package edu.sjsu.cmpe202;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,6 +13,25 @@ import edu.sjsu.cmpe202.util.TLVParser;
 import edu.sjsu.cmpe202.util.TLVParserException;
 
 public class ParseHelper {
+	
+	public void parse(File tlvFile) {
+		try {
+			byte[] tlvDataArray = Files.readAllBytes(tlvFile.toPath());					
+			
+			//Parse the header					
+			if (tlvDataArray.length < 315) {
+				System.err.println("Invalid TLV File.");
+			}					
+			byte[] headerBytes = Arrays.copyOfRange(tlvDataArray, 0, 315);					
+			parseTLVHeader(headerBytes);
+	
+			//Parse the body					
+			byte[] bodyBytes = Arrays.copyOfRange(tlvDataArray, 316, tlvDataArray.length);
+			parseTLVBody(bodyBytes);
+		} catch (IOException ex) {
+			System.out.println("Error reading the SCF File. " + ex.getMessage());				
+		} 
+	}
 	
 	public void parseTLVHeader(byte[] tlvDataArray) {
 		try {
