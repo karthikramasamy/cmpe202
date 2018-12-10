@@ -12,9 +12,9 @@ public class TLV {
 	
 	public TLV(String tag, int length, Object value) {
 		super();
-		this.tag = tag;
-		this.length = length;
-		this.value = value;
+		setTag(tag);
+		setLength(length);
+		setValue(value);
 	}
 	
 	public String getTag() {
