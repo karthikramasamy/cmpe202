@@ -6,6 +6,7 @@ import java.util.Base64;
 
 import org.junit.Test;
 
+import edu.sjsu.cmpe202.ParseHelper;
 import edu.sjsu.cmpe202.util.TLVParser;
 import edu.sjsu.cmpe202.util.TLVParserException;
 
@@ -24,9 +25,22 @@ public class TLVParserTest {
 	}
 	
 	@Test(expected = TLVParserException.class)
-	public void testParseTLVWithInvalidInput() throws TLVParserException {
+	public void testParseTLVWithInvalidInput1() throws TLVParserException {
 		
-		String tlvSample = "AQAEAAAAAQIABAAAAAADAAgQIDBAIFBiTAQAEK3xHzAzzTY3XtovYNwMNu0F";
+		String tlvSample2 = "AQAEAAAAAQIABAAAAAADAAgQIDBAIFBiTAQAEK3xHzAzzTY3XtovYNwMNu";
+		byte[] tlvData2 = Base64.getDecoder().decode(tlvSample2);		
+		
+		String tlvSample1 = "AQAEAAAAAQIABAAAAAADAAgQIDBAIFBiTAQAEK3xHzAzzTY3XtovYNwMNu0F";
+		byte[] tlvData1 = Base64.getDecoder().decode(tlvSample1);
+		
+		TLVParser.parseTLV(tlvData2);
+		TLVParser.parseTLV(tlvData1);		
+	}
+	
+	@Test(expected = TLVParserException.class)
+	public void testParseTLVWithInvalidInput2() throws TLVParserException {
+		
+		String tlvSample = "AQAEAAAAAQECAAQAAAAAAwAIECAwQCBQYkwEABCt8R8wM802N17aL2DcDDY=";
 		byte[] tlvData = Base64.getDecoder().decode(tlvSample);
 		TLVParser.parseTLV(tlvData);
 	}
@@ -37,6 +51,15 @@ public class TLVParserTest {
 		String tlvSample = "";
 		byte[] tlvData = Base64.getDecoder().decode(tlvSample);
 		TLVParser.parseTLV(tlvData);
+	}
+	
+	@Test
+	public void testParseHelper() {
+		ParseHelper helper = new ParseHelper();
+		String tlvSample = "AQAEAAAAAQIABAAAAAADAAgQIDBAIFBiTAQAEK3xHzAzzTY3XtovYNwMNu0FAAQAAAAB";
+		byte[] tlvData = Base64.getDecoder().decode(tlvSample);
+		helper.parseTLVHeader(tlvData);
+		helper.parseTLVBody(tlvData);
 	}
 
 }
