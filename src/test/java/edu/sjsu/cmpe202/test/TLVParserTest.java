@@ -14,6 +14,8 @@ import edu.sjsu.cmpe202.TLVParser;
 import edu.sjsu.cmpe202.TLVParserException;
 
 public class TLVParserTest {
+	
+	private final TLVParser tlvParser = new TLVParser();
 
 	@Test
 	public void testParseTLVWithValidInput() {
@@ -21,7 +23,7 @@ public class TLVParserTest {
 		String tlvSample = "AQAEAAAAAQIABAAAAAADAAgQIDBAIFBiTAQAEK3xHzAzzTY3XtovYNwMNu0FAAQAAAAB";
 		byte[] tlvData = Base64.getDecoder().decode(tlvSample);
 		try {
-			List<TLV> tlvList = TLVParser.parseTLV(tlvData);
+			List<TLV> tlvList = tlvParser.parse(tlvData);
 			assertNotNull(tlvList);
 			for (TLV tlv : tlvList) {
 				assertNotNull(tlv.getTag());
@@ -38,7 +40,7 @@ public class TLVParserTest {
 
 		String tlvSample = "AQAEAAAAAQIABAAAAAADAAgQIDBAIFBiTAQAEK3xHzAzzTY3XtovYNwMNu";
 		byte[] tlvData = Base64.getDecoder().decode(tlvSample);
-		TLVParser.parseTLV(tlvData);
+		tlvParser.parse(tlvData);
 	}
 
 	@Test(expected = TLVParserException.class)
@@ -46,7 +48,7 @@ public class TLVParserTest {
 
 		String tlvSample = "AQAEAAAAAQECAAQAAAAAAwAIECAwQCBQYkwEABCt8R8wM802N17aL2DcDDY=";
 		byte[] tlvData = Base64.getDecoder().decode(tlvSample);
-		TLVParser.parseTLV(tlvData);
+		tlvParser.parse(tlvData);
 	}
 
 	@Test(expected = TLVParserException.class)
@@ -54,14 +56,14 @@ public class TLVParserTest {
 
 		String tlvSample = "AQAEAAAAAQIABAAAAAADAAgQIDBAIFBiTAQAEK3xHzAzzTY3XtovYNwMNu0F";
 		byte[] tlvData = Base64.getDecoder().decode(tlvSample);
-		TLVParser.parseTLV(tlvData);
+		tlvParser.parse(tlvData);
 	}
 
 	public void testParseTLVWithEmptyInput() throws TLVParserException {
 
 		String tlvSample = "";
 		byte[] tlvData = Base64.getDecoder().decode(tlvSample);
-		List<TLV> tlvList = TLVParser.parseTLV(tlvData);
+		List<TLV> tlvList = tlvParser.parse(tlvData);
 		assertTrue(tlvList.size() == 0);
 	}
 }
