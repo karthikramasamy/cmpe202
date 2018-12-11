@@ -6,54 +6,59 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.PathMatcher;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.codec.binary.Hex;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SCFParser {
 
+	private static final Logger LOG = LoggerFactory.getLogger(SCFParser.class);
+
 	private static final PathMatcher tlvFileMatcher = FileSystems.getDefault().getPathMatcher("glob:*.tlv");
+	
+	private static final TLVParser tlvParser = new TLVParser();
 
 	public static void main(String[] args) {
 
 		if (args == null || args.length < 1) {
-			printErrorAndExit("Usage SCFParser <filename>", 101);
+			LOG.error("Usage SCFParser <filename>");
 		} else {
-
-			byte[] scfDataArray = null;
 			try {
-				scfDataArray = readSCF(args[0]);
+				byte[] scfDataArray = readSCF(args[0]);
+				
+				if (scfDataArray == null || scfDataArray.length < 315) {
+					LOG.error("Invalid TLV File.");
+				} else {
+					// Parse the header
+					byte[] headerBytes = Arrays.copyOfRange(scfDataArray, 0, 315);
+					parseHeader(headerBytes);
+
+					// Parse the body
+					byte[] bodyBytes = Arrays.copyOfRange(scfDataArray, 316, scfDataArray.length);
+					parseCertificates(bodyBytes);
+				}
 			} catch (IOException ex) {
-				printErrorAndExit("Error reading SCF. " + ex.getMessage(), 102);
-			}
-
-			if (scfDataArray == null || scfDataArray.length < 315) {
-				printErrorAndExit("Invalid TLV File.", 103);
-			} else {
-				// Parse the header
-				byte[] headerBytes = Arrays.copyOfRange(scfDataArray, 0, 315);
-				parseHeader(headerBytes);
-
-				// Parse the body
-				byte[] bodyBytes = Arrays.copyOfRange(scfDataArray, 316, scfDataArray.length);
-				parseCertificates(bodyBytes);
+				LOG.error("Error reading SCF. {}", ex.getMessage());
 			}
 		}
 	}
 
 	public static byte[] readSCF(String scfPath) throws IOException {
 
-		File tlvFile = new File(scfPath);
+		Path tlvPath = Paths.get(scfPath);
+		
+		if (!tlvFileMatcher.matches(tlvPath.getFileName())) {
+			throw new IllegalArgumentException("Couldn't load SCF. Given input is not a '.tlv' file.");
+		}
+		
+		File tlvFile = tlvPath.toFile();
 
 		if (!tlvFile.exists()) {
 			throw new IllegalArgumentException("Couldn't load SCF. File doesnt exisit.");
-		}
-
-		Path tlvPath = tlvFile.toPath();
-
-		if (!tlvFileMatcher.matches(tlvPath.getFileName())) {
-			throw new IllegalArgumentException("Couldn't load SCF. Given input is not a '.tlv' file.");
 		}
 
 		return Files.readAllBytes(tlvFile.toPath());
@@ -66,7 +71,7 @@ public class SCFParser {
 		}
 
 		try {
-			List<TLV> tlvHeader = TLVParser.parseTLV(Arrays.copyOfRange(tlvDataArray, 0, 315));
+			List<TLV> tlvHeader = tlvParser.parse(Arrays.copyOfRange(tlvDataArray, 0, 315));
 
 			printMessage("\n SCF Header:");
 			printMessage(" ===========");
@@ -85,7 +90,7 @@ public class SCFParser {
 
 	public static void parseCertificates(byte[] bodyBytes) {
 		try {
-			List<TLV> tlvBody = TLVParser.parseTLV(bodyBytes);
+			List<TLV> tlvBody = tlvParser.parse(bodyBytes);
 
 			printMessage("\n SCF Body:");
 			printMessage(" =========");
@@ -111,12 +116,7 @@ public class SCFParser {
 
 	}
 
-	private static void printErrorAndExit(String message, int statusCode) {
-		System.err.println(message);
-		System.exit(statusCode);
-	}
-
 	private static void printMessage(String message) {
-		System.out.println(message);
+		LOG.info(message);
 	}
 }
