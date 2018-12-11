@@ -1,4 +1,4 @@
-package edu.sjsu.cmpe202.util;
+package edu.sjsu.cmpe202;
 
 public class TLV {
 	
