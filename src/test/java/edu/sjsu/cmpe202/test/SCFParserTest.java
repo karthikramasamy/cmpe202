@@ -59,14 +59,14 @@ public class SCFParserTest {
 
 	@Test
 	public void testMainWithInvalidFile() {
-		
+
 		try {
 			SCFParser.main(new String[] { tempSampleInvalidSCFFile.toString() });
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testMainWithEmptyArguments() {
 		SCFParser.main(new String[] {});
@@ -112,17 +112,27 @@ public class SCFParserTest {
 			fail(ex.getMessage());
 		}
 	}
-	
-	@Test(expected = IllegalArgumentException.class)
+
+	@Test
 	public void testParseHeaderWithInvalidInput() {
-		byte[] sampleSCFData = Base64.getDecoder().decode(base64EncodedSampleInvalidSCF);
-		SCFParser.parseHeader(Arrays.copyOfRange(sampleSCFData, 0, 315));
+
+		try {
+			byte[] sampleSCFData = Base64.getDecoder().decode(base64EncodedSampleInvalidSCF);
+			SCFParser.parseHeader(Arrays.copyOfRange(sampleSCFData, 0, 315));
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testParseCertificatesWithInvalidInput() {
-		byte[] sampleSCFData = Base64.getDecoder().decode(base64EncodedSampleValidSCF);
-		SCFParser.parseCertificates(Arrays.copyOfRange(sampleSCFData, 316, sampleSCFData.length));
+
+		try {
+			byte[] sampleSCFData = Base64.getDecoder().decode(base64EncodedSampleValidSCF);
+			SCFParser.parseCertificates(Arrays.copyOfRange(sampleSCFData, 316, sampleSCFData.length));
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 }
