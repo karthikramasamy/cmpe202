@@ -1,4 +1,4 @@
-package edu.sjsu.cmpe202.util;
+package edu.sjsu.cmpe202;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -34,29 +34,35 @@ public class TLVParser {
 	 */
 	public static List<TLV> parseTLV(byte[] tlvData) throws TLVParserException {
 
-		List<TLV> parsedTlvData = new ArrayList<TLV>();
+		List<TLV> parsedTLV = new ArrayList<TLV>();
+		
+		if (tlvData == null || tlvData.length == 0) {
+			return parsedTLV;
+		} 
+		
+		byte[] remainingTLV = tlvData;
 
 		do {
 			// To start with, we need at least 3 bytes for parsing the tag and length
-			if (tlvData.length < TAG_PLUS_LEGNTH_BYTE_SIZE) {
+			if (remainingTLV.length < TAG_PLUS_LEGNTH_BYTE_SIZE) {
 				throw new TLVParserException("Invalid Input. The TLV data doesn't match the specified size.");
 			}
 
-			String tag = Hex.encodeHexString(Arrays.copyOfRange(tlvData, 0, TAG_BYTE_SIZE), false);
-			int length = new BigInteger(Arrays.copyOfRange(tlvData, TAG_BYTE_SIZE, TAG_PLUS_LEGNTH_BYTE_SIZE)).intValue();
+			String tag = Hex.encodeHexString(Arrays.copyOfRange(remainingTLV, 0, TAG_BYTE_SIZE), false);
+			int length = new BigInteger(Arrays.copyOfRange(remainingTLV, TAG_BYTE_SIZE, TAG_PLUS_LEGNTH_BYTE_SIZE)).intValue();
 
 			// Now check if we have enough bytes for the value of specified length
-			if (tlvData.length < TAG_PLUS_LEGNTH_BYTE_SIZE + length) {
+			if (remainingTLV.length < TAG_PLUS_LEGNTH_BYTE_SIZE + length) {
 				throw new TLVParserException("Invalid Input. The TLV data doesn't match the specified size.");
 			}
 
-			byte[] value = Arrays.copyOfRange(tlvData, TAG_PLUS_LEGNTH_BYTE_SIZE, TAG_PLUS_LEGNTH_BYTE_SIZE + length);
+			byte[] value = Arrays.copyOfRange(remainingTLV, TAG_PLUS_LEGNTH_BYTE_SIZE, TAG_PLUS_LEGNTH_BYTE_SIZE + length);
 
-			parsedTlvData.add(new TLV("0x" + tag, length, value));
+			parsedTLV.add(new TLV("0x" + tag, length, value));
 
-			tlvData = Arrays.copyOfRange(tlvData, TAG_PLUS_LEGNTH_BYTE_SIZE + length, tlvData.length);
-		} while (tlvData.length > 0);
+			remainingTLV = Arrays.copyOfRange(remainingTLV, TAG_PLUS_LEGNTH_BYTE_SIZE + length, remainingTLV.length);
+		} while (remainingTLV.length > 0);
 
-		return parsedTlvData;
+		return parsedTLV;
 	}
 }
