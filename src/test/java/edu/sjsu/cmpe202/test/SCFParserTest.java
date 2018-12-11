@@ -1,5 +1,7 @@
 package edu.sjsu.cmpe202.test;
 
+import static org.junit.Assert.fail;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,7 +38,12 @@ public class SCFParserTest {
 	
 	@Test
 	public void testMain() {
-		SCFParser.main(new String[]{tempSCFFile.toString()});
+		
+		try {
+			SCFParser.main(new String[]{tempSCFFile.toString()});
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 	@Test
@@ -56,15 +63,23 @@ public class SCFParserTest {
 	@Test
 	public void testParseHeader() {
 
-		byte[] sampleSCFData = Base64.getDecoder().decode(base64EncodedSampleSCF);
-		SCFParser.parseHeader(Arrays.copyOfRange(sampleSCFData, 0, 315));
+		try {
+			byte[] sampleSCFData = Base64.getDecoder().decode(base64EncodedSampleSCF);
+			SCFParser.parseHeader(Arrays.copyOfRange(sampleSCFData, 0, 315));
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 	@Test
 	public void testParseCertificates() {
 
-		byte[] sampleSCFData = Base64.getDecoder().decode(base64EncodedSampleSCF);
-		SCFParser.parseCertificates(Arrays.copyOfRange(sampleSCFData, 316, sampleSCFData.length));
+		try {
+			byte[] sampleSCFData = Base64.getDecoder().decode(base64EncodedSampleSCF);
+			SCFParser.parseCertificates(Arrays.copyOfRange(sampleSCFData, 316, sampleSCFData.length));
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 }
