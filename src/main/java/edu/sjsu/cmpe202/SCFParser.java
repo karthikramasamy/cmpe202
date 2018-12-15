@@ -78,9 +78,9 @@ public class SCFParser {
 
 			for (TLV tlv : tlvHeader) {
 				if (tlv.getTag().equalsIgnoreCase("0x04") || tlv.getTag().equalsIgnoreCase("0x06") || tlv.getTag().equalsIgnoreCase("0x0E")) {
-					printMessage(tlv.getTag() + " : " + tlv.getLength() + " bytes : " + new String((byte[]) tlv.getValue()));
+					printMessage(tlv.getTag() + " : " + tlv.getLength() + Constants.bytes + new String((byte[]) tlv.getValue()));
 				} else {
-					printMessage(tlv.getTag() + " : " + tlv.getLength() + " bytes : " + Hex.encodeHexString((byte[]) tlv.getValue()));
+					printMessage(tlv.getTag() + " : " + tlv.getLength() + Constants.bytes + Hex.encodeHexString((byte[]) tlv.getValue()));
 				}
 			}
 		} catch (TLVParserException ex) {
@@ -105,9 +105,9 @@ public class SCFParser {
 				}
 
 				if (tlv.getTag().equalsIgnoreCase("0x02") || tlv.getTag().equalsIgnoreCase("0x03") || tlv.getTag().equalsIgnoreCase("0x05")) {
-					printMessage(tlv.getTag() + " : " + tlv.getLength() + " bytes : " + new String((byte[]) tlv.getValue()));
+					printMessage(tlv.getTag() + " : " + tlv.getLength() + Constants.bytes + new String((byte[]) tlv.getValue()));
 				} else {
-					printMessage(tlv.getTag() + " : " + tlv.getLength() + " bytes : " + Hex.encodeHexString((byte[]) tlv.getValue()));
+					printMessage(tlv.getTag() + " : " + tlv.getLength() + Constants.bytes + Hex.encodeHexString((byte[]) tlv.getValue()));
 				}
 			}
 		} catch (TLVParserException ex) {
