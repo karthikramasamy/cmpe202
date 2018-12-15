@@ -1,7 +1,7 @@
 package edu.sjsu.cmpe202.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.Base64;
@@ -59,11 +59,12 @@ public class TLVParserTest {
 		tlvParser.parse(tlvData);
 	}
 
+	@Test
 	public void testParseTLVWithEmptyInput() throws TLVParserException {
 
 		String tlvSample = "";
 		byte[] tlvData = Base64.getDecoder().decode(tlvSample);
 		List<TLV> tlvList = tlvParser.parse(tlvData);
-		assertTrue(tlvList.size() == 0);
+		assertEquals(0, tlvList.size());
 	}
 }
