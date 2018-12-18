@@ -32,7 +32,6 @@
 		<junit-version>4.12</junit-version>
 		
 		<commons-codec-version>1.11</commons-codec-version>
-		<commons-collections-version>4.2</commons-collections-version>		
 	</properties>
 
 	<dependencies>
@@ -72,6 +71,8 @@
 	</dependencies>
 
 	<build>
+		<finalName>scf-parser</finalName>
+		
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
