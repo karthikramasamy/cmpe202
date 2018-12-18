@@ -57,6 +57,11 @@ public class TLVParser {
 
 			String tag = Hex.encodeHexString(Arrays.copyOfRange(remainingTLV, 0, tagByteSize), false);
 			int length = new BigInteger(Arrays.copyOfRange(remainingTLV, tagByteSize, tagPlusLengthByteSize)).intValue();
+			
+			// Check if length is a positive value
+			if (length < 0) {
+				throw new TLVParserException("Invalid Input. The length specified for tag 0x" + tag + " is not a positive integer.");
+			}
 
 			// Now check if we have enough bytes for the value of specified length
 			if (remainingTLV.length < tagPlusLengthByteSize + length) {
