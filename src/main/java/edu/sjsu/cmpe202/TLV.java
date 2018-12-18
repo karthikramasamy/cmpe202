@@ -1,5 +1,7 @@
 package edu.sjsu.cmpe202;
 
+import org.apache.commons.codec.binary.Hex;
+
 public class TLV {
 	
 	private String tag;
@@ -43,4 +45,9 @@ public class TLV {
 		this.value = value;
 	}
 
+	@Override
+	public String toString() {
+		return "TLV [tag=" + tag + ", length=" + length + ", value=" + Hex.encodeHexString((byte[]) value) + "]";
+	}
+	
 }
