@@ -72,7 +72,7 @@ public class SCFParserTest {
 		SCFParser.main(new String[] {});
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testMainWithInvalidArguments1() {
 		SCFParser.main(new String[] { "" });
 	}
@@ -113,15 +113,10 @@ public class SCFParserTest {
 		}
 	}
 
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testParseHeaderWithInvalidInput() {
-
-		try {
-			byte[] sampleSCFData = Base64.getDecoder().decode(base64EncodedSampleInvalidSCF);
-			SCFParser.parseHeader(Arrays.copyOfRange(sampleSCFData, 0, 315));
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+		byte[] sampleSCFData = Base64.getDecoder().decode(base64EncodedSampleInvalidSCF);
+		SCFParser.parseHeader(Arrays.copyOfRange(sampleSCFData, 0, 315));
 	}
 
 	@Test

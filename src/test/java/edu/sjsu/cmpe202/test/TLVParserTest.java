@@ -20,7 +20,7 @@ public class TLVParserTest {
 	@Test
 	public void testParseTLVWithValidInput() {
 
-		String tlvSample = "AQAEAAAAAQIABAAAAAADAAgQIDBAIFBiTAQAEK3xHzAzzTY3XtovYNwMNu0FAAQAAAAB";
+		String tlvSample = "AQACAQICAAIBOAMAAgB/BAA3Q049Z2lnYW50aWMtNi5jaXNjby5jb207T1U9VlRHO089QWxwaGE7TD1TSjtTVD1DQTtDPVVTAAUACCRJHxBwP+qbBgA3Q049Z2lnYW50aWMtNi5jaXNjby5jb207T1U9VlRHO089QWxwaGE7TD1TSjtTVD1DQTtDPVVTAAcAAgAPCAABAQkACAoAAQALAAEBDACANW3w+KrxBW73qxtdPt+EXvNJW085lXaZuwYWgOje+wikT7TD9yq+hgpwiDarChdSsM0aYIAprnpHqJU+7ydlPnxw2+BTqm6fJnflXoN81tlmrsW7bryiA+49B3qQBKIVi5vD9bLNRufjoifJGXxl6S6fvALzmat4w75c6S1yULwOAAxDVExGaWxlLnRsdgAPAARVSte3";
 		byte[] tlvData = Base64.getDecoder().decode(tlvSample);
 		try {
 			List<TLV> tlvList = tlvParser.parse(tlvData);
