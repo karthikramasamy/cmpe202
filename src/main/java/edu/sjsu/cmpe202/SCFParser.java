@@ -21,6 +21,8 @@ public class SCFParser {
 	private static final PathMatcher tlvFileMatcher = FileSystems.getDefault().getPathMatcher("glob:*.tlv");
 	
 	private static final TLVParser tlvParser = new TLVParser();
+	
+	private static final String BYTE_STRING = "bytes";
 
 	public static void main(String[] args) {
 
@@ -43,6 +45,8 @@ public class SCFParser {
 				}
 			} catch (IOException ex) {
 				LOG.error("Error reading SCF. {}", ex.getMessage());
+			} catch (Exception ex) {
+				LOG.error(ex.getMessage());
 			}
 		}
 	}
@@ -78,13 +82,13 @@ public class SCFParser {
 
 			for (TLV tlv : tlvHeader) {
 				if (tlv.getTag().equalsIgnoreCase("0x04") || tlv.getTag().equalsIgnoreCase("0x06") || tlv.getTag().equalsIgnoreCase("0x0E")) {
-					printMessage(tlv.getTag() + " : " + tlv.getLength() + Constants.bytes + new String((byte[]) tlv.getValue()));
+					printMessage(tlv.getTag() + " : " + tlv.getLength() + BYTE_STRING + " : " + new String((byte[]) tlv.getValue()));
 				} else {
-					printMessage(tlv.getTag() + " : " + tlv.getLength() + Constants.bytes + Hex.encodeHexString((byte[]) tlv.getValue()));
+					printMessage(tlv.getTag() + " : " + tlv.getLength() + BYTE_STRING + " : " + Hex.encodeHexString((byte[]) tlv.getValue()));
 				}
 			}
 		} catch (TLVParserException ex) {
-			printMessage("Error parsing the TLV from SCF File. " + ex.getMessage());
+			throw new IllegalArgumentException("Error parsing the SCF Header from SCF File. " + ex.getMessage());
 		}
 	}
 
@@ -105,15 +109,14 @@ public class SCFParser {
 				}
 
 				if (tlv.getTag().equalsIgnoreCase("0x02") || tlv.getTag().equalsIgnoreCase("0x03") || tlv.getTag().equalsIgnoreCase("0x05")) {
-					printMessage(tlv.getTag() + " : " + tlv.getLength() + Constants.bytes + new String((byte[]) tlv.getValue()));
+					printMessage(tlv.getTag() + " : " + tlv.getLength() + BYTE_STRING + " : " + new String((byte[]) tlv.getValue()));
 				} else {
-					printMessage(tlv.getTag() + " : " + tlv.getLength() + Constants.bytes + Hex.encodeHexString((byte[]) tlv.getValue()));
+					printMessage(tlv.getTag() + " : " + tlv.getLength() + BYTE_STRING + " : " + Hex.encodeHexString((byte[]) tlv.getValue()));
 				}
 			}
 		} catch (TLVParserException ex) {
-			printMessage("Error parsing the TLV from SCF File. " + ex.getMessage());
+			throw new IllegalArgumentException("Error parsing the SCF Body from SCF File. " + ex.getMessage());
 		}
-
 	}
 
 	private static void printMessage(String message) {
