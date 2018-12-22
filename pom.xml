@@ -22,7 +22,7 @@
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 		
 		<maven-compiler-plugin-version>3.7.0</maven-compiler-plugin-version>
-		<maven-jar-plugin-version>3.1.0</maven-jar-plugin-version>
+		<maven-jar-plugin-version>3.1.1</maven-jar-plugin-version>
 		<maven-dependency-plugin-version>3.1.1</maven-dependency-plugin-version>
 		<maven-surefire-plugin-version>3.0.0-M1</maven-surefire-plugin-version>
 		<jacoco-maven-plugin-version>0.8.2</jacoco-maven-plugin-version>
