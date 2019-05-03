@@ -21,7 +21,7 @@
 		<project.build.timestamp>${maven.build.timestamp}</project.build.timestamp>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 		
-		<maven-compiler-plugin-version>3.8.0</maven-compiler-plugin-version>
+		<maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
 		<maven-jar-plugin-version>3.1.1</maven-jar-plugin-version>
 		<maven-dependency-plugin-version>3.1.1</maven-dependency-plugin-version>
 		<maven-surefire-plugin-version>3.0.0-M3</maven-surefire-plugin-version>
