@@ -28,7 +28,7 @@
 		<jacoco-maven-plugin-version>0.8.2</jacoco-maven-plugin-version>
 		
 		<log4j-version>2.11.1</log4j-version>
-		<slf4j-version>1.7.25</slf4j-version>
+		<slf4j-version>1.7.27</slf4j-version>
 		<junit-version>4.12</junit-version>
 		
 		<commons-codec-version>1.11</commons-codec-version>
